@@ -1,7 +1,7 @@
 import { useEffect, useContext,useState } from "react";
 import { CityContext } from "../App";
 
-export default function API() {
+export default function Api() {
     const cityInfo = useContext(CityContext);
     const [weather, setWeather] = useState({});
     const [loading, setLoading] = useState(true);
