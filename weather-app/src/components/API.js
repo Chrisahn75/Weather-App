@@ -31,6 +31,7 @@ export default function Api() {
         <div>
             <p>{weather.name}</p>
             <p>{weather?.main?.temp}</p>
+            <p>{weather.weather[0]?.main}</p>
         </div>
     );
 }
