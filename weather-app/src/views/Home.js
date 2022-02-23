@@ -45,7 +45,7 @@ export default function Home() {
         />
         {<span>{errors.city?.message}</span>}
         <button onClick={handleCity}>Search Location</button>
-        <button onClick={handleFavorites}>Put my favorites</button>
+        <button onClick={handleFavorites}>Put in my favorites</button>
       </form>
       <API></API>
     </>
