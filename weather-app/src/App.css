@@ -1,0 +1,39 @@
+.menu {
+  background-color: #123;
+  background-image: linear-gradient(to bottom, #0003, transparent);
+  border-bottom: 1px solid #0003;
+  box-shadow: 0 0 32px #0003;
+  font-size: 2em;
+  font-weight: 300;
+  color: #9ab;
+  padding: 0.75em;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.5s;
+  margin-bottom: 1.5rem;
+}
+.menu:hover {
+  background: #ffffff06;
+  color: #adf;
+  opacity: 1;
+}
+.home {
+  text-align: center;
+  color: grey;
+  text-decoration: none;
+  padding: 0 2rem;
+}
+
+.home:hover {
+  color: black;
+}
+
+.favorites {
+  text-align: center;
+  color: grey;
+  text-decoration: none;
+}
+
+.favorites:hover {
+  color: black;
+}

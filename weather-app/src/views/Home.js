@@ -13,13 +13,23 @@ export default function Home() {
 
   const cityInfo = useContext(CityContext);
   const [currentSearch, setCurrentSearch] = useState("");
-  
+
   const handleSearch = (e) => {
     return setCurrentSearch(e.target.value);
   };
 
   const handleCity = () => {
     cityInfo.setCity(currentSearch);
+  };
+  const handleFavorites = () => {
+    if (cityInfo.favorites.length < 3) {
+      cityInfo.setFavorites((prevState) => {
+        return [... prevState,cityInfo.city];
+      });
+      console.log(cityInfo.favorites);
+    } else {
+      return alert("Sorry you can only have 3 cities in your favorites");
+    }
   };
 
   return (
@@ -35,6 +45,7 @@ export default function Home() {
         />
         {<span>{errors.city?.message}</span>}
         <button onClick={handleCity}>Search Location</button>
+        <button onClick={handleFavorites}>Put my favorites</button>
       </form>
       <API></API>
     </>

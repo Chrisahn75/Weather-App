@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from "./views/Home";
 import Favorites from "./views/Favorites";
+import CityCard from "./components/CityCard"
 import API from "./components/API"
 import './App.css';
 import { createContext, useState } from "react";
@@ -23,9 +24,9 @@ export default function App() {
     <>
       <CityContext.Provider value={context}>
         <BrowserRouter>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/favorites">favorites</Link>
+          <nav className='menu'>
+            <Link className='home' to="/">Home</Link>
+            <Link className='favorites' to="/favorites">Favorites</Link>
           </nav>
           <Switch>
             <Route exact path="/" component={Home}></Route>
