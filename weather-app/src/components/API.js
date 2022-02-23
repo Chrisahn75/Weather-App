@@ -1,71 +1,36 @@
-import React, { useState, useEffect } from "react";
-function Api() {
+import { useEffect, useContext,useState } from "react";
+import { CityContext } from "../App";
+
+export default function API() {
+    const cityInfo = useContext(CityContext);
     const [weather, setWeather] = useState({});
-    const [locations, setLocations] = useState("paris");
-    const [photos, setPhotos] = useState([]);
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
-      Clicked();
-    }, []);
-  
-    function Clicked() {
-      fetch(
-        `http://api.openweathermap.org/data/2.5/weather?q=${locations}&APPID=28f9e922c0090ae3953223780b1074c2&units=metric`
-      )
-        .then((res) => {
-          if (res.ok) {
-            console.log(res.status);
-            return res.json();
-          } else {
-            if (res.status === 404) {
-              return alert("Oops, there seems to be an error!(wrong location)");
-            }
-            alert("Oops, there seems to be an error!");
-            throw new Error("You have an error");
-          }
-        })
-        .then((object) => {
-          setWeather(object);
-          console.log(weather);
-        })
-        .catch((error) => console.log(error));
-      fetch(
-        `https://api.unsplash.com/search/photos?query=${locations}&client_id=28f9e922c0090ae3953223780b1074c2`
-      )
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          } else {
-            throw new Error("You made a mistake");
-          }
-        })
-        .then((data) => {
-          console.log(data);
-          setPhotos(data?.results[0]?.urls?.raw);
-        })
-        .catch((error) => console.log(error));
-    }
-    return (
-      <div className="app">
-        <div className="wrapper">
-          <div className="search">
-            <input
-              type="text"
-              value={locations}
-              onChange={(e) => setLocations(e.target.value)}
-              placeholder="Enter location"
-              className="location_input"
-            />
-            <button className="location_searcher" onClick={Clicked}>
-              Search Location
-            </button>
-          </div>
-          <div className="app__data">
-            <p className="temp">Current Temparature: {weather?.main?.temp}</p>
-          </div>
-          <img className="app__image" src={photos} alt="" />
+        fetch(
+        `http://api.openweathermap.org/geo/1.0/direct?q=${cityInfo.city}&limit=5&appid=28f9e922c0090ae3953223780b1074c2&units=metric`
+        )
+        .then((res) => res.json())
+        .then((res) =>
+            fetch(
+            `https://api.openweathermap.org/data/2.5/weather?lat=${res[0].lat}&lon=${res[0].lon}&appid=28f9e922c0090ae3953223780b1074c2&units=metric`
+            )
+        )
+        .then((res) => res.json())
+        .then((result) => {
+            setWeather(result);
+            setLoading(false);
+            console.log(result);
+        });
+        
+    }, [cityInfo.city]);
+
+    return loading ? (
+        <p>On loading...</p>
+      ) : (
+        <div>
+            <p>{weather.name}</p>
+            <p>{weather?.main?.temp}</p>
         </div>
-      </div>
     );
-  }
-  
-  export default Api;
+}

@@ -11,16 +11,32 @@ export default function Home() {
   } = useForm();
   const onSubmit = (data) => console.log(data);
 
-  const cityInfos = useContext(CityContext);
+  const cityInfo = useContext(CityContext);
   const [currentSearch, setCurrentSearch] = useState("");
+  
+  const handleSearch = (e) => {
+    return setCurrentSearch(e.target.value);
+  };
 
   const handleCity = () => {
-    cityInfos.setCity(currentSearch);
+    cityInfo.setCity(currentSearch);
   };
 
   return (
     <>
-      <h1>Home</h1>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input
+          {...register("city", {
+            required: "this is required",
+          })}
+          placeholder="Search a city"
+          type="text"
+          onChange={handleSearch}
+        />
+        {<span>{errors.city?.message}</span>}
+        <button onClick={handleCity}>Search Location</button>
+      </form>
+      <API></API>
     </>
   );
 }
