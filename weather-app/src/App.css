@@ -41,3 +41,12 @@
 body {
   background-color: wheat;
 }
+
+footer {
+  font-size: 16px;
+  padding: 2em 4em;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  gap: 2em;
+}
