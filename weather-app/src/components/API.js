@@ -1,5 +1,6 @@
 import { useEffect, useContext,useState } from "react";
 import { CityContext } from "../App";
+import "../styles/API.css";
 
 export default function Api() {
     const cityInfo = useContext(CityContext);
@@ -21,17 +22,43 @@ export default function Api() {
             setWeather(result);
             setLoading(false);
             console.log(result);
-        });
-        
+        })
+        .catch((err) => console.log(err));
     }, [cityInfo.city]);
 
     return loading ? (
         <p>On loading...</p>
       ) : (
-        <div>
-            <p>{weather.name}</p>
-            <p>{weather?.main?.temp}</p>
-            <p>{weather.weather[0]?.main}</p>
+        <div className="card">
+            <h2 className="title">{weather.name}</h2>
+                <div className="contentWrapper">
+                    <div className="dataWrapper">
+                        <p>
+                            Temperature:
+                            <span> {Math.round(weather?.main?.temp)}°C</span>
+                        </p>
+                        <p>
+                            <span>
+                            t.max:
+                            <span className="bold"> {Math.round(weather?.main.temp_max)}°C</span>
+                            </span>
+                            <span>
+                            t.min:
+                            <span className="bold"> {Math.round(weather?.main.temp_min)}°C</span>
+                            </span>
+                        </p>
+                        <p>Сloudiness: {weather?.clouds.all} %</p>
+                        <p>Longitude: {weather?.coord.lon}°</p>
+                        <p>Latitude: {weather?.coord.lat}°</p>
+                    </div>
+                        <div className="imageWrapper">
+                            <img
+                                className="weatherIcon"
+                                src={`http://openweathermap.org/img/wn/${weather.weather?.[0].icon}@4x.png`}
+                                alt="weather"
+                            />
+                        </div>
+                </div>
         </div>
     );
 }

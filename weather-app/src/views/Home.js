@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { CityContext } from "../App";
 import API from "../components/API";
+import "../styles/Home.css";
 
 export default function Home() {
   const {
@@ -33,9 +34,11 @@ export default function Home() {
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <>
+      <form className="searchForm" onSubmit={handleSubmit(onSubmit)}>
+        <div className="searchFormWrapper">
         <input
+            className="searchFormInput"
           {...register("city", {
             required: "this is required",
           })}
@@ -44,10 +47,13 @@ export default function Home() {
           onChange={handleSearch}
         />
         {<span>{errors.city?.message}</span>}
-        <button onClick={handleCity}>Search Location</button>
-        <button onClick={handleFavorites}>Put in my favorites</button>
+        <button className="searchFormButton" onClick={handleCity}>Search Location</button>
+        <button className="searchFormButton" onClick={handleFavorites}>Put in my favorites</button>
+        </div>  
       </form>
       <API></API>
     </>
+      
+     
   );
 }
