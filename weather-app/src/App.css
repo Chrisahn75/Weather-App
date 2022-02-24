@@ -37,3 +37,7 @@
 .favorites:hover {
   color: black;
 }
+
+body {
+  background-color: wheat;
+}

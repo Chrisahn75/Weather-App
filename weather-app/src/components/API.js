@@ -35,7 +35,7 @@ export default function Api() {
                     <div className="dataWrapper">
                         <p>
                             Temperature:
-                            <span> {Math.round(weather?.main?.temp)}°C</span>
+                            <span> {Math.round(weather.main.temp)}°C</span>
                         </p>
                         <p>
                             <span>

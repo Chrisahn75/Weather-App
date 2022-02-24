@@ -25,7 +25,7 @@ export default function Home() {
   const handleFavorites = () => {
     if (cityInfo.favorites.length < 3) {
       cityInfo.setFavorites((prevState) => {
-        return [... prevState,cityInfo.city];
+        return [...prevState,cityInfo.city];
       });
       console.log(cityInfo.favorites);
     } else {
@@ -37,18 +37,18 @@ export default function Home() {
       <>
       <form className="searchForm" onSubmit={handleSubmit(onSubmit)}>
         <div className="searchFormWrapper">
-        <input
-            className="searchFormInput"
-          {...register("city", {
-            required: "this is required",
-          })}
-          placeholder="Search a city"
-          type="text"
-          onChange={handleSearch}
-        />
-        {<span>{errors.city?.message}</span>}
-        <button className="searchFormButton" onClick={handleCity}>Search Location</button>
-        <button className="searchFormButton" onClick={handleFavorites}>Put in my favorites</button>
+            <input
+                className="searchFormInput"
+                {...register("city", {
+                    required: "this is required",
+                })}
+                placeholder="Search a city"
+                type="text"
+                onChange={handleSearch}
+            />
+            {<span>{errors.city?.message}</span>}
+            <button className="searchFormButton" onClick={handleCity}>Search Location</button>
+            <button className="searchFormButton" onClick={handleFavorites}>Put in my favorites</button>
         </div>  
       </form>
       <API></API>

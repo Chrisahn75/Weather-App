@@ -12,7 +12,7 @@ export const CityContext = createContext("");
 export default function App() {
 
   const [city, setCity] = useState("Paris");
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState({});
   const context= {
     city: city,
     setCity: setCity,
