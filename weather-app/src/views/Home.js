@@ -23,12 +23,14 @@ export default function Home() {
     cityInfo.setCity(currentSearch);
   };
   const handleFavorites = () => {
-    if (cityInfo.favorites.length) {
+    if (cityInfo.favorites.length < 3) {
       cityInfo.setFavorites((prevState) => {
         return [...prevState,cityInfo.city];
       });
       console.log(cityInfo.favorites);
-    } 
+    } else {
+      return alert("Sorry you can only have 3 cities in your favorites");
+    }
   };
 
   return (
